@@ -1,0 +1,18 @@
+blocks = {
+    ("minecraft:concrete", "color", "white") : (208, 214, 215),
+    ("minecraft:concrete", "color", "orange") : (225, 99, 3),
+    ("minecraft:concrete", "color", "magenta") : (170, 49, 160),
+    ("minecraft:concrete", "color", "light_blue") : (35, 137, 99),
+    ("minecraft:concrete", "color", "yellow") : (214, 175, 21),
+    ("minecraft:concrete", "color", "lime") : (94, 169, 24),
+    ("minecraft:concrete", "color", "pink") : (214, 102, 144),
+    ("minecraft:concrete", "color", "gray") : (54, 57, 51),
+    ("minecraft:concrete", "color", "silver") : (126, 126, 116),
+    ("minecraft:concrete", "color", "cyan") : (21, 119, 136),
+    ("minecraft:concrete", "color", "purple") : (100, 31, 156),
+    ("minecraft:concrete", "color", "blue") : (44, 46, 142),
+    ("minecraft:concrete", "color", "brown") : (97, 61, 33),
+    ("minecraft:concrete", "color", "green") : (73, 91, 36),
+    ("minecraft:concrete", "color", "red") : (143, 33, 33),
+    ("minecraft:concrete", "color", "black") : (7, 9, 14),
+}
