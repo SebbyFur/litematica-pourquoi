@@ -17,8 +17,8 @@ from colors import blocks
 block = BlockState("minecraft:gold_block")
 centre = BlockState("minecraft:diamond_block")
 
-sgw = BlockState("minecraft:concrete", {"color": "white"})
-sgb = BlockState("minecraft:concrete", {"color": "black"})
+sgw = BlockState("minecraft:stained_glass", {"color": "white"})
+sgb = BlockState("minecraft:stained_glass", {"color": "black"})
 
 def cercle(name):
     length = int(input("length?: "))
@@ -65,7 +65,7 @@ def hexagoneIrr(name):
         region.setblock(length-1, 0, x, block)
     return schem
 
-def pngToLitematic(name):
+def png_to_litematic(name):
     img = Image.open(askopenfilename())
     width, height = img.size
     px = img.load()
@@ -75,7 +75,7 @@ def pngToLitematic(name):
         for z in range(height):
             if (px[x, z][3] >= 130):
                 region.setblock(x, 0, z, sgb)
-            elif (math.sqrt((x-127)**2+(z-127)**2) < 127):
+            elif (math.sqrt((x-224)**2+(z-224)**2) < 224):
                 region.setblock(x, 0, z, sgw)
     return schem
 
@@ -88,7 +88,7 @@ def png_to_colored_litematic(name):
     for x in range(width):
         for z in range(height):
             pixel = px[x, z]
-            if (len(pixel) > 3 and pixel[3] < 130):
+            if (len(pixel) > 3 and pixel[3] < 110):
                 continue
             block = find_closest_block(pixel[:3])
             metadata = {block[i] : block[i+1] for i in range(1, len(block)-1)}
@@ -115,10 +115,24 @@ def find_closest_block(p):
 def calc_distance(p1, p2):
     return(math.sqrt(sum((p1[i]-p2[i])**2 for i in range(3))))
 
+def circle_walls(name):
+    length = int(input("Circle size?: "))
+    schem = Schematic(length, 100, length, name=name, author="Sebby", description="ftg", main_region_name=name)
+    region = schem.regions[name]
+    stone = BlockState("minecraft:stone")
+    stone_slab = BlockState("minecraft:stone_slab")
+    for x in range(length):
+        for z in range(length):
+            if math.sqrt((x-length//2)**2+(z-length//2)**2) > length//2 and math.sqrt((x-length//2)**2+(z-length//2)**2) < length//2:
+                for y in range(100):
+                    region.setblock(x, y, z, stone)
+                region.setblock(x, 100, z, stone_slab)
+    return(schem)
+
 if __name__ == "__main__":
     name = sys.argv[1]
     config = ConfigParser()
     config.read("config.ini")
     schem_folder = config["Config"]["schematic_folder"]
-    schem = pngToLitematic(name)
+    schem = png_to_litematic(name)
     save(schem, name, schem_folder)
